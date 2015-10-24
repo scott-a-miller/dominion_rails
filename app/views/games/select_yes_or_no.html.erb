@@ -1,0 +1,23 @@
+
+<% if @turn_state -%>
+<%= render :partial=>"status" %>
+<%= render :partial=>"available" %>
+
+<div id="available_message">
+  <table>
+    <tr>
+      <td><%= @message %></td>
+      <td><%= link_to(image_tag("yes.png", :border=>"0"), :action=>@action, :yes_or_no=>"Yes") %></td>
+      <td><%= link_to(image_tag("no.png", :border=>"0"), :action=>@action, :yes_or_no=>"No") %></td>
+    </tr>
+  </table>
+</div>
+
+<% if @card -%>
+<%= tiny_card(@card, 500, 325) %>
+<% end -%>
+
+<%= render :partial=>"hand" %>
+<% else -%>
+<div>Starting Game...</div>
+<% end -%>

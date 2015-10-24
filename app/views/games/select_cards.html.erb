@@ -1,0 +1,23 @@
+<%= render :partial=>"status" %>
+<%= render :partial=>"available" %>
+
+<div id="hand_message">
+<%= form_tag :action=>@action %>
+  <input type="hidden" id="card_id_list" name="card_id_list" value=""/>
+  <table>
+    <tr>
+      <td><%= @message %></td>
+      <td><input type="image" src="<%= image_path 'done.png' %>" border="0" alt="Submit"/></td>
+    </tr>
+  </table>
+</form>
+</div>
+
+<div id="hand_cards">
+</div>
+
+<% @hand.each_with_index do |card, index| -%>
+<% (x, y) = hand_card_location(index, @hand.size) -%>
+<%= selectable_card(card, x, y) %>
+<% end -%>
+

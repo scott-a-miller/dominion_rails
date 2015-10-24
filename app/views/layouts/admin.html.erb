@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>Dominion - Admin</title>
+    <% if @periodic_refresh_time -%>
+      <meta http-equiv="refresh" content="<%= @periodic_refresh_time %>"/>
+    <% end -%>
+  </head>
+
+  <h1>Dominion Admin</h1>
+  <% if flash[:notice] -%>
+  <%= flash[:notice] %>
+  <% end -%>
+
+  <%= yield :layout %>
+</html>

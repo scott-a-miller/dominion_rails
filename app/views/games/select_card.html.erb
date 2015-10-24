@@ -1,0 +1,26 @@
+<%= render :partial=>"status" %>
+<%= render :partial=>"available" %>
+
+<div id="hand_message">
+  <table>
+    <tr>
+      <td><%= @message %></td>
+      <% if @none_ok -%>
+      <td><%= link_to(image_tag("none.png", :border=>"0"), :action=>@action, :card_id=>"None") %></td>
+      <% end -%>
+    </tr>
+  </table>
+</div>
+
+<div id="hand_cards">
+</div>
+
+<% @hand.each_with_index do |card, index| -%>
+<% (x, y) = hand_card_location(index, @hand.size) -%>
+<% if available? card -%>
+<%= link_to(tiny_card(card, x, y), :action=>@action, :card_id=>card.card_id) %>
+<% else -%>
+<%= tiny_card(card, x, y, true) %>
+<% end -%>
+<% end -%>
+

@@ -1,0 +1,7 @@
+<div id="hand_cards">
+</div>
+
+<% @hand.each_with_index do |card, index| -%>
+<% (x, y) = hand_card_location(index, @hand.size) -%>
+<%= tiny_card(card, x, y) %>
+<% end -%>

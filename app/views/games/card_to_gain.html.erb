@@ -1,0 +1,47 @@
+<%= render :partial=>"status" %>
+
+<div id="available_cards">
+</div>
+
+<% @available_standard_cards.each_with_index do |card, index| -%>
+  <% if available? card -%>
+  <%=  link_to(tiny_card(card, 285 + (index*77), 5), :action=>:card_to_gain, :card_id=>card.card_id) %>
+  <%=  coin_image(card.cost, 287 + (index*77), 96) %>
+  <% if show_available_counts -%>
+  <%=  number_image(@interface.turn_state.number_available(card), 332 + (index*77), 96) %>
+  <% end -%>
+  <% else -%>
+  <%=  tiny_card(card, 285 + (index*77), 5, true) %>
+  <%=  coin_image(card.cost, 287 + (index*77), 96) %>
+  <% if show_available_counts -%>
+  <%=  number_image(@interface.turn_state.number_available(card), 332 + (index*77), 96) %>
+  <% end -%>
+  <% end -%>
+<% end -%>
+
+<% @available_kingdom_cards.each_with_index do |card, index| -%>
+  <% if available? card -%>
+  <%=  link_to(tiny_card(card, 285 + (index*77), 128), :action=>:card_to_gain, :card_id=>card.card_id) %>
+  <%=  coin_image(card.cost, 287 + (index*77), 219) %>
+  <% if show_available_counts -%>
+  <%=  number_image(@interface.turn_state.number_available(card), 332 + (index*77), 219) %>
+  <% end -%>
+  <% else -%>
+  <%=  tiny_card(card, 285 + (index*77), 128, true) %>
+  <%=  coin_image(card.cost, 287 + (index*77), 219) %>
+  <% if show_available_counts -%>
+  <%=  number_image(@interface.turn_state.number_available(card), 332 + (index*77), 219) %>
+  <% end -%>
+  <% end -%>
+<% end -%>
+
+<div id="available_message">
+  <table>
+    <tr>
+      <td>Select a card to gain from above, or </td>
+      <td><%= link_to(image_tag("none.png", :border=>"0"), :action=>:card_to_gain, :card_id=>"None") %></td>
+    </tr>
+  </table>
+</div>
+
+<%= render :partial=>"hand" %>

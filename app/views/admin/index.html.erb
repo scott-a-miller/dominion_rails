@@ -1,0 +1,15 @@
+<table border="1">
+  <tr>
+    <th>Id</th>
+    <th></th>
+  </tr>
+  <% @games.each do |game| -%>
+  <tr>
+    <td><%= game.game_id %></td>
+    <td><%= button_to "Stop", :action=>:stop_game, :id=>game.game_id %></td>
+    <td><%= button_to "Remove", :action=>:remove_game, :id=>game.game_id %></td>
+    <td><%= game.state %></td>
+    <td><%= game.player_states.map{|s|s.player.name}.join(",") %></td>
+  </tr>
+  <% end -%>
+</table>

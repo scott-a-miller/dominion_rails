@@ -1,0 +1,100 @@
+<% if !(@wait_for_humans =~ /_ai/) -%>
+<script>
+  function check_status() {
+    $("#update_image").css("display", "inline");
+    $.ajax({
+            url: "<%= url_for :action=>:check_status %>",
+                dataType : 'json',
+                data : {},
+                success : function(data, textStatus){
+                  if (data == "Ready") {
+                    window.location.reload();
+                  }
+                  else {
+                    $("#users_playing").text("Number of users playing: " + data.playing);
+                    $("#users_waiting").text("Number of users waiting: " + data.waiting);
+                    $("#update_image").css("display", "none");
+                  }
+                },
+                error : function(x, txt, e){
+                  alert(txt);
+                  window.location.reload();
+                }
+            });
+
+    setTimeout("check_status()", 3000);
+  }
+
+  $(document).ready(function() {
+     setTimeout("check_status()", 3000);
+   });
+</script>
+<% end -%>
+
+<div>
+  Welcome: <%= @current_user.login %>
+  <br/>
+  <%= link_to "Logout", :controller=>:sessions, :action=>:destroy %>
+  <br/><br/>
+</div>
+
+<div id="users_playing">
+  Number of users playing: <%= @number_playing %>
+</div>
+
+<div id="users_waiting">
+  Number of users waiting: <%= @number_waiting %>
+</div>
+
+<%= form_tag :action=>:update, :method=>:post %>
+  <table>
+    <tr><td>&nbsp;</td></tr>
+    <% ["easy", "difficult"].each do |level| -%>
+    <tr>
+      <td><label for="play_<%= level %>_ai">Play against <%= level %> computer players now</label></td>
+      <td><input type="radio" id="play_<%= level %>_ai" name="wait_for_humans"
+                 value="<%= level %>_ai"
+                 <%= @wait_for_humans == "#{level}_ai" ? "checked='checked'" : "" %> /></td>
+    </tr>
+    <% end -%>
+
+    <tr><td>&nbsp;</td></tr>
+
+    <% (1..3).each do |i| -%>
+    <tr>
+      <td><label for="wait_for_<%= i.to_s %>">Wait for at least <%= pluralize(i, "other human player") %></label></td>
+      <td><input type="radio" id="wait_for_<%= i.to_s %>" name="wait_for_humans"
+                 value="<%= i.to_s %>"
+                 <%= @wait_for_humans == i ? "checked='checked'" : "" %> /></td>
+    </tr>
+    <% end -%>
+
+    <tr><td>&nbsp;</td></tr>
+
+    <tr>
+      <td><label for="two_player_only">Wait to play in a two-player game only.</label></td>
+      <td><input type="radio" id="two_player_only" name="wait_for_humans"
+                 value="two_player_only"
+                 <%= @wait_for_humans == "two_player_only" ? "checked='checked'" : "" %> /></td>
+    </tr>
+
+    <tr><td>&nbsp;</td></tr>
+
+  </table>
+
+<%= submit_tag 'Update Preferences' %>
+</form>
+
+
+
+<% if !(@wait_for_humans =~ /_ai/) -%>
+<div>
+  <table>
+    <tr>
+      <td>Waiting...</td>
+      <td><%= image_tag "ajax_loader.gif", :id=>"update_image", :style=>"display:none" %></td>
+    </tr>
+  </table>
+</div>
+<% end -%>
+

@@ -1,0 +1,70 @@
+<% if @turn_state -%>
+<script>
+  update_millis = 2000;
+
+  $(document).ready(function() {
+    $("#message_input").focus();
+    $("#message_input").mousedown(function() {
+      $(this).focus();
+      return true;
+    });
+
+    var objects = [
+      <%= @objects.nil? ? "" : @objects.map{|o|o.to_json}.join(",\n") %>
+    ];
+
+    events = [
+      <%= @events.nil? ? "" : @events.reverse.map{|list|
+        "[" + list.map{|v| v.to_json}.join(",") + "]"
+      }.join(", ") %>
+    ];
+    last_event_ids = [];
+
+    object_ids = [];
+    should_update = <%= @game_state == "game_over" ? "false" : "true" %>;
+
+    for (var i = 0; i < objects.length; i++) {
+      var dom_id = objects[i].dom_id;
+      add_or_update_object(objects[i]);
+      object_ids[dom_id] = dom_id;
+      if (is_interactive(objects[i])) {
+        should_update = false;
+      }
+    }
+    add_card_focus();
+
+    show_next_event();
+  });
+</script>
+
+<% @player_states.each_with_index do |player_state, i| -%>
+<div class="player_status"
+  style="top:<%= i * 54 %>px;">
+</div>
+<% end -%>
+
+<%= image_tag "medium/blank-medium.png", :id=>'focused_card' %>
+
+<div class="events"></div>
+
+<div id="available_cards"></div>
+
+<div id="hand_cards"></div>
+
+<div id="message_box">
+  <%= form_tag({:action=>:send_message}, {:onsubmit=>"return false;"}) %>
+    <table>
+      <tr>
+        <td><input id="message_input" onKeyPress="if(enter_pressed(event)){ send_message(); }"
+                   type="text" name="message" value=""/></td>
+        <td><input type="submit" value="Send" onclick="send_message();"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+<% else -%>
+<div>Starting Game...</div>
+<% end -%>
+
+<%= image_tag "ajax_loader.gif", :id=>'updating_image', :style=>'display:none' %>

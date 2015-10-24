@@ -1,0 +1,15 @@
+<% if @turn_state -%>
+<%= render :partial=>"status" %>
+<%= render :partial=>"available" %>
+
+<div id="available_message"><%= @message %>
+</div>
+
+<% @available.each_with_index do |card, i| -%>
+<%= link_to(tiny_card(card, 500 + (i * 77), 325), :action=>:card_to_trash_or_keep, :card_id=>card.card_id) %>
+<% end -%>
+
+<%= render :partial=>"hand" %>
+<% else -%>
+<div>Starting Game...</div>
+<% end -%>

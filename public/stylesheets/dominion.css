@@ -1,0 +1,169 @@
+/** highlighted background-color: #c89e72*/
+/** unused background-color: #ecdfb7 */
+
+body
+{
+  background-color:#ece4cc;
+  color: #000000;
+}
+
+ul
+{
+  list-style: none;
+}
+
+a
+{
+  color: #000000;
+}
+
+
+#logo
+{
+  position: absolute;
+  top: 5px;
+  left: 823px;
+}
+
+.player_status
+{
+  font-weight: bold;
+  font-size: 12px;
+  font-family: arial;
+  background-color: #ecdfb7;
+  position: absolute;
+  width: 276px;
+  height: 51px;
+  left: 0px;
+  border: 1px solid #000000;
+}
+
+#focused_card
+{
+  position:absolute;
+  top: 214px;
+  left: 0px;
+}
+
+.card
+{
+  position:absolute;
+}
+
+#available_message {
+  position:absolute;
+  top: 265px;
+  left: 278px;
+  font-weight: bold;
+  font-size: 12px;
+  font-family: arial;
+}
+
+#available_message td
+{
+  font-weight: bold;
+  font-size: 12px;
+  font-family: arial;
+}
+
+#available_cards
+{
+  position:absolute;
+  background-color:#ecdfb7;
+  top: 0px;
+  left: 278px;
+  width: 782px;
+  height: 256px;
+  border: 1px solid #000000;
+}
+
+#hand_message {
+  position:absolute;
+  top: 485px;
+  left: 278px;
+  font-weight: bold;
+  font-size: 12px;
+  font-family: arial;
+}
+
+#hand_message td {
+  font-weight: bold;
+  font-size: 12px;
+  font-family: arial;
+}
+
+.panel
+{
+  background-color:#ecdfb7;
+  border: 1px solid #222222;
+}
+
+#hand_cards
+{
+  position:absolute;
+  background-color:#ecdfb7;
+  top: 490px;
+  left: 278px;
+  height: 127px;
+  width: 782px;
+  border: 1px solid #222222;
+}
+
+#events
+{
+  position:absolute;
+  left: 1059px;
+  top: 0px;
+  width: 300px;
+  font-weight: bold;
+  font-size: 10px;
+  font-family: arial;
+}
+
+div.event
+{
+  position:absolute;
+  left: 437px;
+  top: 215px;
+  width: 475px;
+  height: 298px;
+  background-color:#ecdfb7;
+  border: 1px solid #ecdfb7;
+}
+
+#new_game_buttons
+{
+  position:absolute;
+  top: 95px;
+  left: 870px;
+  font-weight: bold;
+  font-size: 12px;
+  font-family: arial;
+}
+
+#updating_image
+{
+  position:absolute;
+  top: 631px;
+  left: 1044px;
+}
+
+#message_box
+{
+  position:absolute;
+  top: 621;
+  left: 278;
+  width: 782px;
+  height: 26px;
+  border: 1px solid #222222;
+}
+
+#message_box table
+{
+  margin-top: 0px;
+}
+#message_input
+{
+  width: 700px;
+}
+

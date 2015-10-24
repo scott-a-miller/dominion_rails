@@ -1,0 +1,10 @@
+<div id="available_cards">
+</div>
+
+<% @available_standard_cards.each_with_index do |type, index| -%>
+<%= tiny_card(card, 285 + (index*77), 5, true) %>
+<% end -%>
+
+<% @available_kingdom_cards.each_with_index do |type, index| -%>
+<%= tiny_card(type, 285 + (index*77), 128, true) %>
+<% end -%>

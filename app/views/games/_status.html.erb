@@ -1,0 +1,45 @@
+<script>
+  $(document).ready(function() {
+    $(".card, .selectable_card").mouseover(function() {
+      var src = $(this).attr("src");
+      var match = /(.*)\/[a-z]+\/(.*)-[a-z]+-gray.png/.exec(src);
+      if (match) {
+        $("#focused_card").attr("src", match[1] + "/medium/" + match[2] + "-medium-gray.png");
+      }
+      else {
+        match = /(.*)\/[a-z]+\/(.*)-[a-z]+.png/.exec(src);
+        if (match) {
+          $("#focused_card").attr("src", match[1] + "/medium/" + match[2] + "-medium.png");
+        }
+      }
+    });
+  });
+</script>
+
+<% @player_states.each_with_index do |player_state, i| -%>
+<% winner = @winning_player_ids && @winning_player_ids.include?(player_state.player_id) -%>
+<div class="player_status"
+  style="top:<%= 2 + i * 53 %>px;">
+  <%= player_state.name %>
+  <% if winner -%>
+    <br/>WINNER!
+  <% end -%>
+</div>
+<%= hand_image(player_state.hand_size, 155, 8 + i*53) %>
+<%= deck_image(player_state.deck_size, 195, 1 + i*53) %>
+<%= discard_image(player_state.discard_size, 235, 6 + i*53) %>
+<% if @turn_state.game_over? -%>
+<%= points_image(player_state.score, 115, 6 + i*53) %>
+<% end -%>
+<% end -%>
+
+<%= focus_card %>
+
+<div class="events">
+<% @played_cards.each_with_index do |card, index| -%>
+<% (x, y) = played_card_location(index, @played_cards.size) -%>
+<%= tiny_card(card, x, y) %>
+<% end -%>
+</div>
+
+

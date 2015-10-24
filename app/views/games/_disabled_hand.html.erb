@@ -1,0 +1,6 @@
+<div id="hand_cards">
+</div>
+
+<% @hand.each_with_index do |card, index| -%>
+<%= tiny_card(card, 285 + ((index%10)*77), 605 - (123*(index / 10)), true) %>
+<% end -%>

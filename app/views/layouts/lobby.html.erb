@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>Dominion - Broken Model Games</title>
+    <%= stylesheet_link_tag "dominion" %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "jquery" %>
+    <%= javascript_include_tag "jquery-ui" %>
+  </head>
+
+  <h1>Dominion Lobby</h1>
+  <% if flash[:notice] -%>
+  <%= flash[:notice] %>
+  <% end -%>
+
+  <%= yield :layout %>
+</html>

@@ -1,0 +1,18 @@
+<div id="available_cards">
+</div>
+
+<% @available_standard_cards.each_with_index do |card, index| -%>
+<%= tiny_card(card, 285 + (index*77), 5) %>
+<%=  coin_image(card.cost, 287 + (index*77), 96) %>
+<% if show_available_counts -%>
+<%=  number_image(@interface.turn_state.number_available(card), 332 + (index*77), 96) %>
+<% end -%>
+<% end -%>
+
+<% @available_kingdom_cards.each_with_index do |card, index| -%>
+<%= tiny_card(card, 285 + (index*77), 128) %>
+<%=  coin_image(card.cost, 287 + (index*77), 219) %>
+<% if show_available_counts -%>
+<%=  number_image(@interface.turn_state.number_available(card), 332 + (index*77), 219) %>
+<% end -%>
+<% end -%>
